@@ -20,57 +20,65 @@ const getSingle = async (req, res) => {
     });
 }
 
-// const createContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contact = {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         favoriteColor: req.body.favoriteColor,
-//         birthday: req.body.birthday
-//     };
+const createMember = async(req, res) => {
+    //#swagger.tags=['Members']
+    const member = {
+        email: req.body.email,
+        birthday: req.body.birthday,
+        ward: req.body.ward,        
+        stake: req.body.stake,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        memberNum: req.body.memberNum
+    };
 
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').insertOne(contact);
+    const response = await mongodb.getDatabase().db('project2').collection('members').insertOne(member);
 
-//     if(response.acknowledged) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while creating the contact.')
-//     };
-// }
+    if(response.acknowledged) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while creating the member.')
+    };
+}
 
-// const updateContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contactId = new ObjectId(req.params.id);
-//     const contact = {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         favoriteColor: req.body.favoriteColor,
-//         birthday: req.body.birthday
-//     };
+const updateMember = async(req, res) => {
+    //#swagger.tags=['Members']
+    const memberId = new ObjectId(req.params.id);
+    const member = {
+        email: req.body.email,
+        birthday: req.body.birthday,
+        ward: req.body.ward,        
+        stake: req.body.stake,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        memberNum: req.body.memberNum
+    };
 
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').replaceOne({_id: contactId}, contact);
+    const response = await mongodb.getDatabase().db('project2').collection('members').replaceOne({_id: memberId}, member);
 
-//     if(response.modifiedCount > 0) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while updating the contact.')
-//     };
-// }
+    if(response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while updating the member.')
+    };
+}
 
-// const deleteContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contactId = new ObjectId(req.params.id);
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').deleteOne({_id: contactId});
+const deleteMember = async(req, res) => {
+    //#swagger.tags=['Members']
+    const memberId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().db('project2').collection('members').deleteOne({_id: memberId});
 
-//     if(response.deletedCount > 0) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while deleting the contact.')
-//     };
-// }
+    if(response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while deleting the member.')
+    };
+}
 
 module.exports = {
     getAll,
-    getSingle}
+    getSingle,
+    createMember,
+    updateMember,
+    deleteMember
+};

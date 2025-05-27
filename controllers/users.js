@@ -20,57 +20,57 @@ const getSingle = async (req, res) => {
     });
 }
 
-// const createContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contact = {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         favoriteColor: req.body.favoriteColor,
-//         birthday: req.body.birthday
-//     };
+const createUser = async(req, res) => {
+    //#swagger.tags=['Users']
+    const user = {
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password
+    };
 
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').insertOne(contact);
+    const response = await mongodb.getDatabase().db('project2').collection('users').insertOne(user);
 
-//     if(response.acknowledged) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while creating the contact.')
-//     };
-// }
+    if(response.acknowledged) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while creating the user.')
+    };
+}
 
-// const updateContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contactId = new ObjectId(req.params.id);
-//     const contact = {
-//         firstName: req.body.firstName,
-//         lastName: req.body.lastName,
-//         email: req.body.email,
-//         favoriteColor: req.body.favoriteColor,
-//         birthday: req.body.birthday
-//     };
+const updateUser = async(req, res) => {
+    //#swagger.tags=['Users']
+    const userId = new ObjectId(req.params.id);
+    const user = {
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password
+    };
 
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').replaceOne({_id: contactId}, contact);
+    const response = await mongodb.getDatabase().db('project2').collection('users').replaceOne({_id: userId}, user);
 
-//     if(response.modifiedCount > 0) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while updating the contact.')
-//     };
-// }
+    if(response.modifiedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while updating the user.')
+    };
+}
 
-// const deleteContact = async(req, res) => {
-//     //#swagger.tags=['Contacts']
-//     const contactId = new ObjectId(req.params.id);
-//     const response = await mongodb.getDatabase().db('project1').collection('contacts').deleteOne({_id: contactId});
+const deleteUser = async(req, res) => {
+    //#swagger.tags=['Users']
+    const userId = new ObjectId(req.params.id);
+    const response = await mongodb.getDatabase().db('project2').collection('users').deleteOne({_id: userId});
 
-//     if(response.deletedCount > 0) {
-//         res.status(204).send();
-//     } else {
-//         res.status(500).json(response.error || 'Some Error occurred while deleting the contact.')
-//     };
-// }
+    if(response.deletedCount > 0) {
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'Some Error occurred while deleting the user.')
+    };
+}
 
 module.exports = {
     getAll,
-    getSingle}
+    getSingle,
+    createUser,
+    updateUser,
+    deleteUser
+};

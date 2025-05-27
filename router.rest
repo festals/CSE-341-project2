@@ -1,0 +1,59 @@
+//Local Host 
+### Get All members  
+GET http://localhost:3001/members
+### Get All users  
+GET http://localhost:3001/users
+
+### Get members by id 
+GET http://localhost:3001/members/6835ab8175b789f36b0be02e
+### Get users by id 
+GET http://localhost:3001/users/6835af3a75b789f36b0be032
+
+### Create members 
+POST http://localhost:3001/members HTTP/1.1
+Content-Type: application/json
+{
+  "email": "porters@yahoo.com",
+  "birthday": "26/05/1980",
+  "ward": "Snake River Branch",
+  "stake": "Ammon Idaho East Stake",
+  "firstName": "Porter",
+  "lastName": "Sariah",
+  "memberNum": "56465859"
+}
+
+### Create users 
+POST http://localhost:3001/users HTTP/1.1
+Content-Type: application/json
+{
+    "email": "test@email.com",
+    "username": "Imatest",
+    "password": "test"
+}
+
+### Update members 
+PUT http://localhost:3001/members/6835ad8775b789f36b0be02f HTTP/1.1
+Content-Type: application/json
+{
+    "email": "smithj@gmail.com",
+    "birthday": "10/10/1964",
+    "ward": "Hampton Branch",
+    "stake": "Ames Iowa",
+    "firstName": "Smith",
+    "lastName": "John",
+    "memberNum": "6548746"
+}
+
+### Update users 
+PUT http://localhost:3001/users/6835af3a75b789f36b0be032 HTTP/1.1
+Content-Type: application/json
+{
+   "email": "ex@email.com",
+    "username": "Imtheexemple",
+    "password": "perhapsperhapsperhaps"
+}
+
+###Delete members 
+DELETE http://localhost:3001/members/6835ab8175b789f36b0be02e HTTP/1.1
+###Delete users
+DELETE http://localhost:3001/users/6835af3a75b789f36b0be032 HTTP/1.1
