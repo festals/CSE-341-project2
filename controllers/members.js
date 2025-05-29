@@ -3,25 +3,37 @@ const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
     //#swagger.tags=['Members']
+    try {
+    if (req.query.triggerError === 'true') {
+      throw new Error('Artificial Error for demonstration');
+    }
     const result = await mongodb.getDatabase().db('project2').collection('members').find();
     result.toArray().then((members) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(members);
     });
+    } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 const getSingle = async (req, res) => {
     //#swagger.tags=['Members']
+    try {
     const itemId = new ObjectId(req.params.id);
     const result = await mongodb.getDatabase().db('project2').collection('members').find({ _id:itemId });
     result.toArray().then((members) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(members[0]);
     });
-}
+    } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 const createMember = async(req, res) => {
     //#swagger.tags=['Members']
+    try {
     const member = {
         email: req.body.email,
         birthday: req.body.birthday,
@@ -39,7 +51,10 @@ const createMember = async(req, res) => {
     } else {
         res.status(500).json(response.error || 'Some Error occurred while creating the member.')
     };
-}
+    } catch (error) {
+    next(error);
+  }
+};
 
 const updateMember = async(req, res) => {
     //#swagger.tags=['Members']
