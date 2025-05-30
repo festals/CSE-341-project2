@@ -31,7 +31,7 @@ const memberValidationRules = () => {
       .withMessage("Invalid email format"),
     body("birthday")
       .matches(/^\d{2}\/\d{2}\/\d{4}$/)
-      .withMessage("use the format dd/mm/yyyy4"),
+      .withMessage("use the format dd/mm/yyyy"),
     body("ward")
       .isAlpha("en-US", { ignore: " " })
       .withMessage("Please do not use numbers or special characters"),
@@ -51,8 +51,6 @@ const memberValidationRules = () => {
     body("memberNum")
       .isLength(8)
       .withMessage("Member numero is 8 number long")
-      .matches(/^[0-9]$/)
-      .withMessage("Please use only numbers"),
   ];
 };
 
